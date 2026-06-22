@@ -17,33 +17,8 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://food-waste-management-system-h9zo.vercel.app",
+  "https://food-waste-management-system-h9zo.vercel.app"
 ];
-
-// IMPORTANT: handle preflight + reflect valid origins
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
-
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-  );
-
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-
-  next();
-});
 
 app.use(
   cors({
@@ -69,7 +44,6 @@ export const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   },
 });
 

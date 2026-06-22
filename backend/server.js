@@ -20,13 +20,21 @@ const allowedOrigins = [
   "https://food-waste-management-system-h9zo.vercel.app",
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    // allow requests with no origin like Postman/mobile apps
+    if (!origin) return callback(null, true);
 
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
@@ -35,9 +43,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 app.get("/", (req, res) => {
-  res.json({
-    message: "FoodWise API Running",
-  });
+  res.json({ message: "FoodWise API Running" });
 });
 
 const server = http.createServer(app);

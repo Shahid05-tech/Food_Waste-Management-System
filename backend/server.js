@@ -14,10 +14,9 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://food-waste-management-alpha.vercel.app"
+  "https://food-waste-management-system-uup5.vercel.app"
 ];
 
 app.use(

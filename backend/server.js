@@ -16,7 +16,8 @@ connectDB();
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://food-waste-management-system-uup5.vercel.app"
+  "https://food-waste-management-system-uup5.vercel.app",
+  "https://food-waste-management-syst-git-5e19cf-shahids-projects-00572e71.vercel.app",
 ];
 
 app.use(
